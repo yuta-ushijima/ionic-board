@@ -8,6 +8,8 @@ import moment from "moment";
 // 定義したPostのInterfaceをインポート
 import { Post } from "../../app/models/post";
 
+import { LoginPage } from "../login/login";
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -36,11 +38,12 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
+    // ログアウトしたあとでもFireStoreへ正常に読み書きできるようにする処理
+    this.afStore.firestore.enableNetwork();
     this.getPosts();
   }
 
   addPost() {
-    debugger;
     /*入力されたメッセージを使って、投稿データを作成*/
     this.post = {
       id: "",
@@ -151,6 +154,26 @@ export class HomePage {
   diffrenceTime(time: Date): string {
     moment.locale('ja');
     return moment(time).fromNow();
+  }
+
+  //ログアウト処理
+  logout() {
+    //disableNetworkでfirebaseへの接続を無効化
+    this.afStore.firestore.disableNetwork();
+    this.afAuth.auth.signOut()
+      .then(() => {
+        this.toastCtrl.create({
+          message: 'ログアウトしました',
+          duration: 4000
+        }).present();
+        this.navCtrl.setRoot(LoginPage);
+      })
+      .catch(error => {
+        this.toastCtrl.create({
+          message: error,
+          duration: 6000
+        }).present();
+      });
   }
 
 }
