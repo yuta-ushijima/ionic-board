@@ -41,7 +41,7 @@ export class HomePage {
   /*入力されたメッセージを使って、投稿データを作成*/
   this.post = {
     userName: 'Mariko Ushijima',
-    messsage: this.message,
+    message: this.message,
     createdDate: '数秒前'
   };
   /*配列postsにpostを追加*/
@@ -63,7 +63,7 @@ export class HomePage {
        {
          text: 'キャンセル',
          role: 'cancel',
-         hanler: () => {
+         handler: () => {
            console.log('キャンセルされました');
          }
        },
