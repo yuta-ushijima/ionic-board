@@ -3,6 +3,7 @@ import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 import { AngularFireAuth } from "@angular/fire/auth";
 import * as firebase from 'firebase';
+import moment from "moment";
 
 // 定義したPostのInterfaceをインポート
 import { Post } from "../../app/models/post";
@@ -39,32 +40,32 @@ export class HomePage {
   }
 
   addPost() {
-  /*入力されたメッセージを使って、投稿データを作成*/
-  this.post = {
-    id: "",
-    userName: this.afAuth.auth.currentUser.displayName,
-    message: this.message,
-    created: firebase.firestore.FieldValue.serverTimestamp()
-  };
+    debugger;
+    /*入力されたメッセージを使って、投稿データを作成*/
+    this.post = {
+      id: "",
+      userName: this.afAuth.auth.currentUser.displayName,
+      message: this.message,
+      created: firebase.firestore.FieldValue.serverTimestamp()
+    };
 
-  // Firebaseにデータを追加
-  this.afStore.collection('posts').add(this.post)
-    //投稿に成功した場合
-    .then( (docRef) =>{
-      this.postsCollection.doc(docRef.id).update({
-        id: docRef.id
+    // Firebaseにデータを追加
+    this.afStore.collection('posts').add(this.post)
+      //投稿に成功した場合
+      .then( (docRef) =>{
+        this.postsCollection.doc(docRef.id).update({
+          id: docRef.id
+        });
+        /*入力フィールドを空にする*/
+        this.message = '';
+      })
+      //投稿に失敗したらToastでエラーを表示
+      .catch((error) => {
+        this.toastCtrl.create({
+          message: error,
+          duration: 6000
+        }).present();
       });
-      /*入力フィールドを空にする*/
-      this.message = '';
-    })
-    //投稿に失敗したらToastでエラーを表示
-    .catch((error) => {
-      this.toastCtrl.create({
-        message: error,
-        duration: 6000
-      }).present();
-    });
-
   }
 
   getPosts() {
@@ -143,6 +144,13 @@ export class HomePage {
           duration: 6000
         }).present();
     })
+  }
+
+  //投稿日時と現在日時の差分を返す
+  // Date型で投稿日時を受け取り、momemnt.jsのfromNowで現在時刻との差分を文字列で返している
+  diffrenceTime(time: Date): string {
+    moment.locale('ja');
+    return moment(time).fromNow();
   }
 
 }

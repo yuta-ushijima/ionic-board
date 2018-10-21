@@ -11,7 +11,7 @@
     <ion-list class="inputBlock">
       <ion-item padding class="textBlock">
         <ion-label floating>メッセージ</ion-label>
-        <ion-input type="text" (ngModel)="message" required name="message"></ion-input>
+        <ion-input type="text" [(ngModel)]="message" required name="message"></ion-input>
       </ion-item>
       <button type="submit" block class="submit" ion-button [disabled]="!f.form.valid">投稿</button>
     </ion-list>
@@ -44,8 +44,8 @@
           </button>
         </ion-col>
         <ion-col class="postTime">
-          <ion-note>
-            {{p.createdDate}}
+          <ion-note *ngIf="p.created">
+            {{ diffrenceTime(p.created.toDate()) }}
           </ion-note>
         </ion-col>
       </ion-row>
