@@ -17,7 +17,7 @@
     </ion-list>
   </form>
 
-  <ion-card class="singlePost" *ngFor="let p of posts; let i = index">
+  <ion-card class="singlePost" *ngFor="let p of posts">
     <ion-item>
       <h2 padding-vertical>{{p.userName}}</h2>
     </ion-item>
@@ -32,13 +32,13 @@
           </button>
         </ion-col>
         <ion-col>
-          <button (click)="presentPrompt(i)" ion-button icon-start clear small>
+          <button (click)="presentPrompt(p)" ion-button icon-start clear small>
             <ion-icon name="create"></ion-icon>
             <div>編集</div>
           </button>
         </ion-col>
         <ion-col>
-          <button (click)="deletePost(i)" ion-button icon-start clear small>
+          <button (click)="deletePost(p)" ion-button icon-start clear small>
             <ion-icon name="trash"></ion-icon>
             <div>削除</div>
           </button>
