@@ -4,6 +4,7 @@ import {IonicPage, NavController, ToastController } from 'ionic-angular';
 // Import for Firebase Auth
 import { AngularFireAuth } from "@angular/fire/auth";
 import { HomePage } from "../home/home";
+import { SignupPage } from "../signup/signup";
 
 @IonicPage()
 @Component({
@@ -49,4 +50,8 @@ export class LoginPage {
     });
   }
 
+  //サインアップページに移動させる処理
+  gotoSignUp() {
+    this.navCtrl.push(SignupPage);
+  }
 }
