@@ -17,13 +17,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from "../pages/login/login";
 import { SignupPage } from "../pages/signup/signup";
+import { CommentsPage } from "../pages/comments/comments";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    CommentsPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { SignupPage } from "../pages/signup/signup";
     MyApp,
     HomePage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    CommentsPage
   ],
   providers: [
     StatusBar,
