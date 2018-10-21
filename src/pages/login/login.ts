@@ -37,7 +37,7 @@ export class LoginPage {
       this.login.password,
     ).then(user => {//ログインが成功したとき
       this.toastCtrl.create({
-        message: 'ログインしました',
+        message: `${user.user.displayName}さん、こんにちは！`,
         duration: 4000,
       }).present();
       //ログインできたら、メッセージボードへ移動
@@ -51,7 +51,8 @@ export class LoginPage {
   }
 
   //サインアップページに移動させる処理
-  gotoSignUp() {
+  gotoSignup() {
     this.navCtrl.push(SignupPage);
   }
+
 }

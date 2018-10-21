@@ -36,7 +36,7 @@ export class SignupPage {
     console.log('ionViewDidLoad SignupPage');
   }
 
-  singUp() {
+  signUp() {
     //ユーザーアカウントの作成
     this.afAuth.auth.createUserWithEmailAndPassword(
       this.signup.email,
@@ -71,4 +71,5 @@ export class SignupPage {
   goBack() {
     this.navCtrl.pop();
   }
+
 }
